@@ -1,16 +1,23 @@
 #ifndef __BINARY_H_INCLUDED__
 #define __BINARY_H_INCLUDED__
 
+#include "types.h"
+
+/*
+ * THESE MACROS WOULD BE VERY COSTLY ON VARIABLES. USE THEM FOR HARDCODED
+ * CONSTS ONLY.
+ */
+
 #define __HEX(n) 0x##n##u
 #define __BIN_8(bits) \
-  ((bits & 0x00000001U) ? 0x01 : 0x00) \
+( ((bits & 0x00000001U) ? 0x01 : 0x00) \
 | ((bits & 0x00000010U) ? 0x02 : 0x00) \
 | ((bits & 0x00000100U) ? 0x04 : 0x00) \
 | ((bits & 0x00001000U) ? 0x08 : 0x00) \
 | ((bits & 0x00010000U) ? 0x10 : 0x00) \
 | ((bits & 0x00100000U) ? 0x20 : 0x00) \
 | ((bits & 0x01000000U) ? 0x40 : 0x00) \
-| ((bits & 0x10000000U) ? 0x80 : 0x00)
+| ((bits & 0x10000000U) ? 0x80 : 0x00) )
 
 #define BIN_8(bits)       ((uint8_t) __BIN_8(__HEX(bits)))
 #define BIN_16(msb, lsb)  ((uint16_t) BIN_8(msb) << 8 + BIN_8(lsb))
@@ -272,7 +279,9 @@
 #define B11111110 BIN_8(11111110)
 #define B11111111 BIN_8(11111111)
 
-//for pixels
+/*
+ * Allows the definition of a line of pixels in GB graphics.
+ */
 #define __PIXEL_LINE(line) \
 (uint8_t) ( ((line & 0x00000001U) ? 0x01 : 0x00)  \
           | ((line & 0x00000010U) ? 0x02 : 0x00)  \

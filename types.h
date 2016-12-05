@@ -15,4 +15,9 @@ typedef uint8_t       bool;
 #define true  1
 #define false 0
 
+// Used in for loops;
+uint8_t i;
+uint8_t j;
+uint8_t k;
+
 #endif
